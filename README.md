@@ -42,8 +42,10 @@ npx tsc --init
 Nous allons ajouter une ligne dans le fichier `tsconfig.json` pour dire à TS de compiler en mode module.
 
 ```json
-outDir: "./dist",
-rootDir: "./src",
+{
+	"outDir": "./dist",
+	"rootDir": "./src"
+}
 ```
 
 ## 📝 Scripts
@@ -80,11 +82,3 @@ npm start
 ### 👋 Qui suis-je ?
 
 Je suis **Anthony Gorski**, développeur web et formateur à la [Wild Code School](https://www.wildcodeschool.com/fr-FR).
-
-```
-
-```
-
-```
-
-```
