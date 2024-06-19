@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> <h1 align=&#34;center&#34;>Bienvenue sur express-ts 👋</h1> <p>   <a href=&#34;https://twitter.com/Gorski_anthony&#34; target=&#34;_blank&#34;>     <img alt=&#34;Twitter: Gorski_anthony&#34; src=&#34;https://img.shields.io/twitter/follow/Gorski_anthony.svg?style=social&#34; />   </a> </p>
+> Un projet pour démarrer un serveur express en TypeScript
 
 ## 🚀 Installation
 
