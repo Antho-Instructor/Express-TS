@@ -62,6 +62,29 @@ Nous allons ajouter une ligne dans le fichier `tsconfig.json` pour dire à TS de
 npm start
 ```
 
+## 🚀 Build
+
+Pour build notre application, nous allons installer un package qui va nous permettre de lancer notre serveur en mode watch:
+
+```sh
+npm install @types/node
+npm install ts-node-dev --save-dev
+```
+
+-   @types/node : pour les types de Node (comme pour express)
+-   ts-node-dev : pour lancer notre serveur en mode watch
+-
+
+### Update du script start
+
+```json
+"scripts": {
+  "start": "node dist/index.js",
+  "build": "tsc",
+  "dev": "ts-node-dev --respawn src/index.ts"
+}
+```
+
 ## Auteur
 
 👤 **Anthony Gorski**
