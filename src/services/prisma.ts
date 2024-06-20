@@ -14,5 +14,4 @@ const opt = {
 const prisma = new PrismaClient(opt);
 
 */
-
-module.exports = prisma;
+export { prisma };

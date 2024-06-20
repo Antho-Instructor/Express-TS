@@ -133,10 +133,10 @@ model Article {
   id       Int         @id @default(autoincrement())
   title    String
   content  String       @db.Text
-  categories    Categorie[]  @relation("have")
+  categories    Category[]  @relation("have")
 }
 
-model Categorie {
+model Category {
   id       Int         @id @default(autoincrement())
   name     String
   articles    Article[]  @relation("have")
