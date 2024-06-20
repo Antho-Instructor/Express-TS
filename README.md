@@ -159,6 +159,22 @@ Et voilà 🎉 !
 
 Et oui, nous avons effectivement oublié le reste, c'est à dire nos routes, nos controllers et nos models.
 
+Mais avant, si on suit toujours la documentation, nous devons installer `@prisma/client`.
+
+```sh
+npm install @prisma/client
+```
+
+Mais à quoi ça sert 🤔 ? A ça !
+
+![prisma](https://www.prisma.io/docs/assets/images/prisma-client-install-and-generate-ece3e0733edc615e416d6d654c05e980.png)
+
+> C'est surtout pour accéder à la bdd, la sécurité, la performance.
+
+> En résumé, **`@prisma/client`** est essentiel pour utiliser Prisma de manière efficace et sécurisée.
+
+Une fois téléchargé, nous allons créer un fichier `prisma.ts` dans le dossier `services`.
+
 ## Auteur
 
 👤 **Anthony Gorski**
@@ -179,6 +195,10 @@ Et oui, nous avons effectivement oublié le reste, c'est à dire nos routes, nos
 ### 👋 Qui suis-je ?
 
 Je suis **Anthony Gorski**, développeur web et formateur à la [Wild Code School](https://www.wildcodeschool.com/fr-FR).
+
+```
+
+```
 
 ```
 
