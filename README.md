@@ -16,21 +16,17 @@
 ## Les dépendances
 
 Nous avons besoin de typescript bien sûr pour la compilation de notre code.
+ts-node-dev pour lancer notre serveur en mode watch et les types de node pour les types de node.
 
 ```sh
-npm install typescript
+npm install typescript ts-node-dev @types/node --save-dev
 ```
 
 Nous avons l'habitude de faire un `npm install express` et de l'utiliser en vanilla, mais en TS, nous avons besoin de plus de choses. Les types par exemple.
 
 ```sh
-npm install express @types/express
-```
-
-Nous avons aussi besoin, bas de `ts-node` pour lancer notre serveur.
-
-```sh
-npm install ts-node
+npm install express
+npm install -D @types/express
 ```
 
 ## ⚙️ Configuration de TS
@@ -52,7 +48,7 @@ Nous allons ajouter une ligne dans le fichier `tsconfig.json` pour dire à TS de
 
 ```json
 "scripts": {
-  "start": "ts-node src/index.ts"
+  "start": "ts-node-dev src/index.ts"
 }
 ```
 
@@ -63,17 +59,6 @@ npm start
 ```
 
 ## 🚀 Build
-
-Pour build notre application, nous allons installer un package qui va nous permettre de lancer notre serveur en mode watch:
-
-```sh
-npm install @types/node
-npm install ts-node-dev --save-dev
-```
-
--   @types/node : pour les types de Node (comme pour express)
--   ts-node-dev : pour lancer notre serveur en mode watch
--
 
 ### Update du script start
 
