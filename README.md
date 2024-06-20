@@ -121,6 +121,44 @@ Pourquoi avons nous besoins de ce modèle ⬆️ ?
 
 Tout simplement car nous en avons besoin pour générer nos modèles avec Prisma. #PasDeHasard
 
+### Création des models
+
+Nous allons créer nos models en fonction de notre modèle conceptuel de données.
+
+<details>
+<summary>📁 models</summary>
+
+```prisma
+model Article {
+  id       Int         @id @default(autoincrement())
+  title    String
+  content  String       @db.Text
+  categories    Categorie[]  @relation("have")
+}
+
+model Categorie {
+  id       Int         @id @default(autoincrement())
+  name     String
+  articles    Article[]  @relation("have")
+}
+```
+
+</details>
+
+Une fois que c'est fait, nous allons créer nos migrations avec la commande:
+
+```sh
+npx prisma migrate dev --name init
+```
+
+Et voilà 🎉 !
+
+![wait](https://miro.medium.com/v2/resize:fit:1146/1*ozXnd7LHrxGYKpRoJozVVQ.png)
+
+## Pas trop vite
+
+Et oui, nous avons effectivement oublié le reste, c'est à dire nos routes, nos controllers et nos models.
+
 ## Auteur
 
 👤 **Anthony Gorski**
