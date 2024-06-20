@@ -2,11 +2,11 @@ import express, { Request, Response } from "express";
 import { prisma } from "../services/prisma";
 const router = express.Router();
 
-interface ArticleBody {
+type ArticleType = {
 	title: string;
 	content: string;
 	categoriesId: number[];
-}
+};
 
 router.get("/", async (req: Request, res: Response) => {
 	try {
@@ -40,7 +40,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		const { title, content, categoriesId } = req.body as ArticleBody;
+		const { title, content, categoriesId } = req.body as ArticleType;
 
 		const category = await prisma.article.create({
 			data: {

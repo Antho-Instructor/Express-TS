@@ -2,6 +2,10 @@ import express, { Request, Response } from "express";
 import { prisma } from "../services/prisma";
 const router = express.Router();
 
+type CategoryType = {
+	name: string;
+};
+
 router.get("/", async (req: Request, res: Response) => {
 	try {
 		const categories = await prisma.category.findMany();
@@ -30,9 +34,11 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
+		const { name } = req.body as CategoryType;
+
 		const category = await prisma.category.create({
 			data: {
-				name: req.body.name,
+				name,
 			},
 		});
 		res.status(201).send(category);

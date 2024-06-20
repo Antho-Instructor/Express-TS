@@ -175,6 +175,162 @@ Mais à quoi ça sert 🤔 ? A ça !
 
 Une fois téléchargé, nous allons créer un fichier `prisma.ts` dans le dossier `services`.
 
+Nous allons y importer `PrismaClient` et l'instancier.
+
+```ts
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+export default prisma;
+```
+
+Je vous passe les détails de la création des controllers, mais vous pouvez les retrouver dans le projet.
+
+<details>
+<summary>articleRoute.ts</summary>
+
+```ts
+import express, { Request, Response } from "express";
+import { prisma } from "../services/prisma";
+const router = express.Router();
+
+type ArticleType = {
+	title: string;
+	content: string;
+	categoriesId: number[];
+};
+
+router.get("/", async (req: Request, res: Response) => {
+	try {
+		const categories = await prisma.article.findMany({
+			include: {
+				categories: true,
+			},
+		});
+		res.status(200).send(categories);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+router.get("/:id", async (req: Request, res: Response) => {
+	try {
+		const category = await prisma.article.findUnique({
+			where: {
+				id: parseInt(req.params.id),
+			},
+		});
+		res.status(200).send(category);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+router.post("/", async (req: Request, res: Response) => {
+	try {
+		const { title, content, categoriesId } = req.body as ArticleType;
+
+		const category = await prisma.article.create({
+			data: {
+				title,
+				content,
+				categories: {
+					connect: categoriesId.map((id) => ({ id })),
+				},
+			},
+			include: {
+				categories: true,
+			},
+		});
+		res.status(201).send(category);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+export default router;
+```
+
+</details>
+
+<details>
+<summary>categoryRoute.ts</summary>
+
+```ts
+import express, { Request, Response } from "express";
+import { prisma } from "../services/prisma";
+const router = express.Router();
+
+type CategoryType = {
+	name: string;
+};
+
+router.get("/", async (req: Request, res: Response) => {
+	try {
+		const categories = await prisma.category.findMany();
+		res.status(200).send(categories);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+router.get("/:id", async (req: Request, res: Response) => {
+	try {
+		const category = await prisma.category.findUnique({
+			where: {
+				id: parseInt(req.params.id),
+			},
+		});
+		res.status(200).send(category);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+router.post("/", async (req: Request, res: Response) => {
+	try {
+		const { name } = req.body as CategoryType;
+
+		const category = await prisma.category.create({
+			data: {
+				name,
+			},
+		});
+		res.status(201).send(category);
+	} catch (error) {
+		console.error({ error: (error as Error).message });
+	} finally {
+		prisma.$disconnect();
+	}
+});
+
+export default router;
+```
+
+</details>
+
+## 📝 Documentation
+
+Pour tous les appels à la base de données, nous avons utilisé les méthodes de Prisma.
+
+-   `findMany` pour récupérer tous les éléments
+-   `findUnique` pour récupérer un élément
+-   `create` pour créer un élément
+
+Il en existe d'autres, mais pour le moment, nous n'avons pas besoin de plus.
+
+N'hésitez pas à consulter la [documentation](https://www.prisma.io/docs/concepts/components/prisma-client/crud) pour plus d'informations.
+
 ## Auteur
 
 👤 **Anthony Gorski**
@@ -195,11 +351,3 @@ Une fois téléchargé, nous allons créer un fichier `prisma.ts` dans le dossie
 ### 👋 Qui suis-je ?
 
 Je suis **Anthony Gorski**, développeur web et formateur à la [Wild Code School](https://www.wildcodeschool.com/fr-FR).
-
-```
-
-```
-
-```
-
-```
