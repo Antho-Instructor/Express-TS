@@ -111,6 +111,16 @@ datasource db {
 }
 ```
 
+### Merise
+
+Nous allons partir de ce modèle pour notre base de données.
+
+![Merise](./docs/mcd.png)
+
+Pourquoi avons nous besoins de ce modèle ⬆️ ?
+
+Tout simplement car nous en avons besoin pour générer nos modèles avec Prisma. #PasDeHasard
+
 ## Auteur
 
 👤 **Anthony Gorski**
