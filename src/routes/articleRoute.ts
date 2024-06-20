@@ -5,12 +5,16 @@ const router = express.Router();
 interface ArticleBody {
 	title: string;
 	content: string;
-	categoryId: number;
+	categoriesId: number[];
 }
 
 router.get("/", async (req: Request, res: Response) => {
 	try {
-		const categories = await prisma.article.findMany();
+		const categories = await prisma.article.findMany({
+			include: {
+				categories: true,
+			},
+		});
 		res.status(200).send(categories);
 	} catch (error) {
 		console.error({ error: (error as Error).message });
@@ -36,16 +40,14 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		const { title, content, categoryId } = req.body as ArticleBody;
+		const { title, content, categoriesId } = req.body as ArticleBody;
 
 		const category = await prisma.article.create({
 			data: {
 				title,
 				content,
 				categories: {
-					connect: {
-						id: categoryId,
-					},
+					connect: categoriesId.map((id) => ({ id })),
 				},
 			},
 			include: {
